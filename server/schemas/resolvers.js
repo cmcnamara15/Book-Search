@@ -1,18 +1,20 @@
 const { User } = require('../models');
 const { signToken } = require('../utils/auth');
+const { AuthenticationError } = require('appolo-server-express');
+
 
 module.exports ={
     Query: {
         me: async function(parent, args, context) {
             const foundUser = await User.findOne({
-                $or: [{ _id: user ? user._id : params.id }, { username: params.username }],
+                _id: context.user._id
             });
         
             if (!foundUser) {
-                return res.status(400).json({ message: 'Cannot find a user with this id!' });
+                throw new AuthenticationError('Cannot find a user with this id!')
             }
         
-            res.json(foundUser);
+            return(foundUser);
             },
     },
     Mutation: {
