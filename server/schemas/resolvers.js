@@ -3,7 +3,7 @@ const { signToken } = require('../utils/auth');
 
 module.exports ={
     Query: {
-        async getSingleUser({ user = null, params }, res) {
+        async getSingleUser(parent, args, context) {
             const foundUser = await User.findOne({
                 $or: [{ _id: user ? user._id : params.id }, { username: params.username }],
             });
@@ -16,7 +16,7 @@ module.exports ={
             },
     },
     Mutation: {
-        async createUser({ body }, res) {
+        async createUser(parent, args, context) {
             const user = await User.create(body);
         
             if (!user) {
@@ -27,7 +27,7 @@ module.exports ={
         },
           // login a user, sign a token, and send it back (to client/src/components/LoginForm.js)
           // {body} is destructured req.body
-        async login({ body }, res) {
+        async login(parent, args, context) {
             const user = await User.findOne({ $or: [{ username: body.username }, { email: body.email }] });
             if (!user) {
                 return res.status(400).json({ message: "Can't find this user" });
@@ -43,7 +43,7 @@ module.exports ={
         },
           // save a book to a user's `savedBooks` field by adding it to the set (to prevent duplicates)
           // user comes from `req.user` created in the auth middleware function
-        async saveBook({ user, body }, res) {
+        async saveBook(parent, args, context) {
             console.log(user);
             try {
                 const updatedUser = await User.findOneAndUpdate(
@@ -58,7 +58,7 @@ module.exports ={
             }
         },
           // remove a book from `savedBooks`
-        async deleteBook({ user, params }, res) {
+        async deleteBook(parent, args, context) {
             const updatedUser = await User.findOneAndUpdate(
                 { _id: user._id },
                 { $pull: { savedBooks: { bookId: params.bookId } } },
