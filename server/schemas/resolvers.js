@@ -39,7 +39,7 @@ module.exports ={
             const correctPw = await user.isCorrectPassword(body.password);
         
             if (!correctPw) {
-                throw new AuthenticationError('Wrong password!');
+                throw new AuthenticationError('Wrong Password!')
             }
             const token = signToken(user);
             res.json({ token, user });
@@ -54,10 +54,10 @@ module.exports ={
                     { $addToSet: { savedBooks: body } },
                     { new: true, runValidators: true }
             );
-                return res.json(updatedUser);
+                return (updatedUser);
             } catch (err) {
                 console.log(err);
-                return res.status(400).json(err);
+                throw new AuthenticationError('Something is wrong!')
             }
         },
           // remove a book from `savedBooks`
@@ -68,9 +68,9 @@ module.exports ={
                 { new: true }
             );
             if (!updatedUser) {
-                return res.status(404).json({ message: "Couldn't find user with this id!" });
+                throw new AuthenticationError('Something is wrong!')
             }
-            return res.json(updatedUser);
+            return (updatedUser);
         },
     },
 
