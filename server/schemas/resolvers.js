@@ -70,7 +70,7 @@ module.exports ={
             if (!updatedUser) {
                 throw new AuthenticationError('Something is wrong!')
             }
-            return (updatedUser);
+            return  (updatedUser);
         },
     },
 
