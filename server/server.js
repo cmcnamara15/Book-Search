@@ -18,8 +18,11 @@ const server = new ApolloServer({
       try {
         const { data } = jwt.verify(token, secret, { maxAge: expiration });
         req.user = data;
+      } catch {
+        console.log('Invalid token');
       }
     }
+  },
 });
 
 app.use(express.urlencoded({ extended: false }));
