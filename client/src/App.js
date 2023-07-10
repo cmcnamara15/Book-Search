@@ -5,8 +5,14 @@ import SearchBooks from './pages/SearchBooks';
 import SavedBooks from './pages/SavedBooks';
 import Navbar from './components/Navbar';
 
+const client = new ApolloClient({
+  uri: '/graphql',
+  cache: new InMemoryCache(),
+});
+
 function App() {
   return (
+    // Wrap the entire app in the ApolloProvider component so that every component has access to the client
     <Router>
       <>
         <Navbar />
