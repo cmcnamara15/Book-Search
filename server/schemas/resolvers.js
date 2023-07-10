@@ -64,9 +64,12 @@ module.exports ={
         },
           // remove a book from `savedBooks`
         deleteBook: async function(parent, args, context) {
+            if(!context.user) {
+                throw new AuthenticationError('You need to be logged in!')
+            }
             const updatedUser = await User.findOneAndUpdate(
-                { _id: user._id },
-                { $pull: { savedBooks: { bookId: params.bookId } } },
+                { _id: context.user._id },
+                { $pull: { savedBooks: { bookId: args.bookId } } },
                 { new: true }
             );
             if (!updatedUser) {
