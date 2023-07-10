@@ -31,12 +31,12 @@ module.exports ={
           // login a user, sign a token, and send it back (to client/src/components/LoginForm.js)
           // {body} is destructured req.body
         login: async function(parent, args, context) {
-            const user = await User.findOne({ $or: [{ username: body.username }, { email: body.email }] });
+            const user = await User.findOne({ $or: [{ username: args.username }, { email: args.email }] });
             if (!user) {
                 throw new AuthenticationError("Cant Find User!")
             }
         
-            const correctPw = await user.isCorrectPassword(body.password);
+            const correctPw = await user.isCorrectPassword(args.password);
         
             if (!correctPw) {
                 throw new AuthenticationError('Wrong Password!')
@@ -47,11 +47,13 @@ module.exports ={
           // save a book to a user's `savedBooks` field by adding it to the set (to prevent duplicates)
           // user comes from `req.user` created in the auth middleware function
         saveBook: async function(parent, args, context) {
-            console.log(user);
+            if(!context.user) {
+                throw new AuthenticationError('You need to be logged in!')
+            }
             try {
                 const updatedUser = await User.findOneAndUpdate(
-                    { _id: user._id },
-                    { $addToSet: { savedBooks: body } },
+                    { _id: context.user._id },
+                    { $addToSet: { savedBooks: args.input } },
                     { new: true, runValidators: true }
             );
                 return (updatedUser);
