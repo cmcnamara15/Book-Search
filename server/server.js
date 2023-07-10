@@ -10,6 +10,16 @@ const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: ({ req }) => {
+    let token = req.headers.authorization || '';
+    token = token.split(' ').pop().trim();
+
+    if(token) {
+      try {
+        const { data } = jwt.verify(token, secret, { maxAge: expiration });
+        req.user = data;
+      }
+    }
 });
 
 app.use(express.urlencoded({ extended: false }));
