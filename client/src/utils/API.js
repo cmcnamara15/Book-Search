@@ -50,6 +50,7 @@ export const createUser = (userData) => {
           }
         }
       }`,
+      variables: userData,
     }),
   });
 };
@@ -108,17 +109,37 @@ export const saveBook = (bookData, token) => {
           }
         }
       }`,
+      variables: { input: bookData },
     }),
   });
 };
 
 // remove saved book data for a logged in user
 export const deleteBook = (bookId, token) => {
-  return fetch(`/api/users/books/${bookId}`, {
-    method: 'DELETE',
+  return fetch(`/graphql`, {
+    method: 'POST',
     headers: {
+      'Content-Type': 'application/json',
       authorization: `Bearer ${token}`,
     },
+    body: JSON.stringify({
+      mutation: `mutation deleteBook($bookId: ID!) {
+        deleteBook(bookId: $bookId) {
+          _id
+          username
+          email
+          savedBooks {
+            _id
+            authors
+            description
+            title
+            image
+            link
+          }
+        }
+      }`,
+      variables: { bookId },
+    }),
   });
 };
 
