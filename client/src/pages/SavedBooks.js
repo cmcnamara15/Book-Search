@@ -4,6 +4,8 @@ import { DELETE_BOOK } from '../graphql/mutations';
 import { GET_ME } from '../graphql/queries';
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import {
   Container,
@@ -39,6 +41,8 @@ const SavedBooks = () => {
 
       // upon success, remove book's id from localStorage
       removeBookId(bookId); // this is calling the 'removeBookId' function imported from './utils/localStorage'
+      toast.success('Book deleted!');
+      
     } catch (err) {
       console.error(err);
     }
