@@ -47,7 +47,7 @@ const resolvers = {
                     { _id: context.user._id },
                     { $addToSet: { savedBooks: input } },
                     { new: true }
-                );
+                ).populate('savedBooks');
 
                 return updatedUser;
             }
@@ -60,7 +60,7 @@ const resolvers = {
                     { _id: context.user._id },
                     { $pull: { savedBooks: { bookId } } },
                     { new: true }
-                );
+                ).populate('savedBooks');
 
                 return updatedUser;
             }
