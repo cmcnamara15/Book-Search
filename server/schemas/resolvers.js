@@ -26,7 +26,7 @@ module.exports ={
                 throw new AuthenticationError('Something is wrong!')
             }
             const token = signToken(user);
-            return({ token, user });
+            return({ token, user: user.toObject() });
         },
           // login a user, sign a token, and send it back (to client/src/components/LoginForm.js)
           // {body} is destructured req.body
@@ -42,7 +42,7 @@ module.exports ={
                 throw new AuthenticationError('Wrong Password!')
             }
             const token = signToken(user);
-            return ({ token, user });
+            return ({ token, user: user.toObject() });
         },
           // save a book to a user's `savedBooks` field by adding it to the set (to prevent duplicates)
           // user comes from `req.user` created in the auth middleware function
