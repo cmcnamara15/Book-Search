@@ -27,14 +27,12 @@ const server = new ApolloServer({
   context: authMiddleware,
 });
 
-// Create a new instance of an Apollo server with the GraphQL schema
-server.start().then(() => {
-  server.applyMiddleware({ app });
+// This line will apply the Apollo server to the existing Express application
+server.applyMiddleware({ app });
 
-  db.once('open', () => {
-    app.listen(PORT, () => {
-      console.log(`API server running on port ${PORT}!`);
-      console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
-    });
+db.once('open', () => {
+  app.listen(PORT, () => {
+    console.log(`API server running on port ${PORT}!`);
+    console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
   });
 });
