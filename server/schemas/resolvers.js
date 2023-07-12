@@ -30,7 +30,7 @@ module.exports ={
         },
           // login a user, sign a token, and send it back (to client/src/components/LoginForm.js)
           // {body} is destructured req.body
-        login: async function(parent, args, context) {
+        loginUser: async function(parent, args, context) {
             const user = await User.findOne({ $or: [{ username: args.username }, { email: args.email }] });
             if (!user) {
                 throw new AuthenticationError("Cant Find User!")
