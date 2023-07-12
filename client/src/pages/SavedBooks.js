@@ -1,7 +1,7 @@
 import React from 'react';
 import { useMutation, useQuery } from '@apollo/client';
-import { REMOVE_BOOK } from '../utils/mutations';
-import { GET_ME } from '../utils/queries';
+import { DELETE_BOOK } from '../graphql/mutations';
+import { GET_ME } from '../graphql/queries';
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 
@@ -15,7 +15,7 @@ import {
 
 const SavedBooks = () => {
   const { loading, data } = useQuery(GET_ME);
-  const [removeBook, { error }] = useMutation(REMOVE_BOOK);
+  const [deleteBookMutation, { error }] = useMutation(DELETE_BOOK);
   
   const userData = data?.me || {};
 
@@ -27,7 +27,7 @@ const SavedBooks = () => {
     }
 
     try {
-      await removeBook({
+      await deleteBookMutation({
         variables: { bookId },
         update: cache => {
           cache.writeQuery({
@@ -38,7 +38,7 @@ const SavedBooks = () => {
       });
 
       // upon success, remove book's id from localStorage
-      removeBookId(bookId);
+      removeBookId(bookId); // this is calling the 'removeBookId' function imported from './utils/localStorage'
     } catch (err) {
       console.error(err);
     }
