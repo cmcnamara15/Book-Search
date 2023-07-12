@@ -2,7 +2,7 @@ const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
 
-const { typeDefs, resolvers } = require('./schemas');
+const { typeDefs, resolvers } = require('.schemas');
 const db = require('./config/connection');
 
 const PORT = process.env.PORT || 3001;
@@ -11,8 +11,9 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: ({ req }) => {
-    let token = req.headers.authorization || '';
-    token = token.split(' ').pop().trim();
+    if(req.headers.authorization) {
+      let token = req.headers.authorization.split(' ').pop().trim();
+  }
 
     if(token) {
       try {
