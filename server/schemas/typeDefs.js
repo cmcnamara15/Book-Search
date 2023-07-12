@@ -39,7 +39,7 @@ const typeDefs = gql`
         createUser(username: String!, email: String!, password: String!): Auth   
         loginUser(email: String!, password: String!): Auth
         saveBook(input: BookInput!): User
-        deleteBook(bookId: String!): User
+        removeBook(bookId: String!): User
     }
 `
 
