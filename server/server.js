@@ -1,8 +1,9 @@
+
+const { authMiddleware } = require('./utils/auth');
 const express = require('express');
 const path = require('path');
 const { ApolloServer } = require('apollo-server-express');
 
-const { authMiddleware } = require('./utils/auth');
 const typeDefs = require('./schemas/typeDefs');
 const resolvers = require('./schemas/resolvers');
 const db = require('./config/connection');
@@ -27,12 +28,17 @@ const server = new ApolloServer({
   context: authMiddleware,
 });
 
-// This line will apply the Apollo server to the existing Express application
-server.applyMiddleware({ app });
+// Use the async/await syntax to start the server before applying middleware
+async function startServer() {
+  await server.start();
+  server.applyMiddleware({ app });
 
-db.once('open', () => {
-  app.listen(PORT, () => {
-    console.log(`API server running on port ${PORT}!`);
-    console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
+  db.once('open', () => {
+    app.listen(PORT, () => {
+      console.log(`API server running on port ${PORT}!`);
+      console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
+    });
   });
-});
+}
+
+startServer();
