@@ -48,23 +48,23 @@ Contribution: If you want to contribute to the project, clone the repository, ma
 If you have any questions please feel free to reach out.<br />
 
 Github: [cmcnamara15](https://github.com/cmcnamara15)<br />
-Email: cmcnamara1991@icloud.com
-LinkdIn: [cmcnamara15](https://www.linkedin.com/in/chris-mcnamara1991/)
-Personal Portfolio: www.chrismacsportfolio.com
+Email: cmcnamara1991@icloud.com<br />
+LinkdIn: [cmcnamara15](https://www.linkedin.com/in/chris-mcnamara1991/)<br />
+Personal Portfolio: (https://www.chrismacsportfolio.com)
 
 ## Screenshots
 
 The following screenshots shows the apps functionality.<br />
 
 
-## HomePage<br />
+## Search Results<br />
 
-<!-- ![Screenshot of home page](/src/assets/screenshots/ScreenshotOne.png) -->
+![Screenshot of home page](/client/src/assets/images/screenshot1.png)
 
-## ProjectsPage<br />
+## Saved Books Page<br />
 
-<!-- ![Screenshot of project page](/src/assets/screenshots/ScreenshotTwo.png) -->
+![Screenshot of project page](client/src/assets/images/screenshot2.png)
 
-## PhotoPage<br />
-<!-- 
-![Screenshot of photo page](/src/assets/screenshots/ScreenshotThree.png) -->
+## Login<br />
+
+![Screenshot of photo page](client/src/assets/images/screenshot3.png)
