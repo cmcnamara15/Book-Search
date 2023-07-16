@@ -1,6 +1,6 @@
 # BOOK SEARCH ENGINE
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![Screenshot of home page](client/src/assets/images/Screenshot5.png)
+![Screenshot of search bar](/client/src/assets/images/screenshot5.png)
 
 ## Description
 ![React](https://img.shields.io/badge/react%20os-0088CC?style=for-the-badge&logo=reactos&logoColor=white)
