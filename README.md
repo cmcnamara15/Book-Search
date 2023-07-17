@@ -60,10 +60,19 @@ The following screenshots shows the apps functionality.<br />
 ## Search Results<br />
 
 ![Screenshot of home page](/client/src/assets/images/screenshot1.png)
+<br />
+<br />
+<br />
+<br />
+
 
 ## Saved Books Page<br />
 
 ![Screenshot of project page](client/src/assets/images/screenshot2.png)
+<br />
+<br />
+<br />
+<br />
 
 ## Login<br />
 
